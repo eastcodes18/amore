@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Forever Valentine</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Quicksand:wght@300;500&display=swap"
+        rel="stylesheet" />
+    <style>
+        :root {
+            --pink-light: #ffcad4;
+            --pink-med: #f4acb7;
+            --pink-dark: #9d8189;
+            --white-soft: #fff1f2;
+            --heart-red: #ff4d6d;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Quicksand", sans-serif;
+            background-color: var(--white-soft);
+            color: var(--pink-dark);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        h1,
+        h2,
+        .script-font {
+            font-family: "Dancing Script", cursive;
+        }
+
+        /* --- OPENING SCREEN --- */
+        #hero-gate {
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg,
+                    var(--pink-light),
+                    var(--white-soft));
+            position: fixed;
+            z-index: 100;
+            transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
+            text-align: center;
+        }
+
+        .cat-img img {
+            width: 200px;
+            height: auto;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+
+        .gate-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 2.5rem;
+            color: var(--heart-red);
+        }
+
+        /* Centering the buttons */
+        .btn-wrapper {
+            position: relative;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 100px;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            position: relative;
+        }
+
+        #yes-btn {
+            background-color: var(--heart-red);
+            color: white;
+            z-index: 2;
+            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
+        }
+
+        #no-btn {
+            background-color: var(--pink-dark);
+            color: white;
+            z-index: 1;
+        }
+
+        /* --- MAIN CONTENT --- */
+        #main-content {
+            opacity: 0;
+            display: none;
+        }
+
+        section {
+            position: relative;
+            min-height: 100vh;
+            padding: 80px 10%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* --- REASONS SECTION --- */
+        .reasons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            width: 100%;
+            margin-top: 40px;
+        }
+
+        .reason-card {
+            background: white;
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border-bottom: 4px solid var(--pink-light);
+        }
+
+        .reason-card h3 {
+            color: var(--heart-red);
+            margin-bottom: 10px;
+        }
+
+        /* --- MEMORIES PHOTO GALLERY --- */
+        .memory-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .memory-item {
+            width: 250px;
+            background: white;
+            padding: 10px;
+            padding-bottom: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transform: rotate(-2deg);
+            transition: transform 0.3s;
+        }
+
+        .memory-item:nth-child(even) {
+            transform: rotate(2deg);
+        }
+
+        .memory-item:hover {
+            transform: rotate(0deg) scale(1.05);
+            z-index: 5;
+        }
+
+        .memory-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: #eee;
+        }
+
+        .memory-caption {
+            font-family: "Dancing Script", cursive;
+            font-size: 1.4rem;
+            margin-top: 15px;
+        }
+
+        /* --- PROMISE SECTION (NEW STYLE) --- */
+        .promise-text-container {
+            max-width: 800px;
+        }
+
+        .promise-quote {
+            font-family: "Dancing Script", cursive;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: var(--pink-dark);
+        }
+
+        .promise-subtext {
+            font-family: "Quicksand", sans-serif;
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--pink-dark);
+            opacity: 0.8;
+        }
+
+        /* --- UTILS --- */
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            cursor: pointer;
+            animation: bounce 2s infinite;
+            background: none;
+            border: none;
+            color: var(--heart-red);
+            font-size: 1.8rem;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-10px);
+            }
+
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .heart {
+            position: fixed;
+            color: var(--heart-red);
+            pointer-events: none;
+            z-index: -1;
+            animation: float 5s linear infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-10vh);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="hero-gate">
+        <div class="gate-content">
+            <div class="cat-img">
+                <picture>
+                    <img src="assets/images/cat-flower.jpg" alt="cat-flower" />
+                </picture>
+            </div>
+            <h1>Will you be my Valentine?</h1>
+            <div class="btn-wrapper" id="btnWrapper">
+                <button class="btn" id="yes-btn" onclick="celebrate()">YES</button>
+                <button class="btn" id="no-btn" onmouseover="moveNo()">No</button>
+            </div>
+        </div>
+    </div>
+
+    <main id="main-content">
+        <section id="letter">
+            <h2 style="font-size: 3rem">To My Unplanned Love,</h2>
+            <p style="
+            max-width: 700px;
+            line-height: 2;
+            margin-top: 20px;
+            font-size: 1.1rem;
+          ">
+                Meeting you wasn't something I planned, but it was the best thing that
+                ever happened to me. You are my greatest blessing from God, the piece
+                of my heart I didn't know was missing. Before you, I didn't realize
+                life could be this bright.
+            </p>
+            <button class="scroll-down" onclick="scrollToNext('reasons')">❤</button>
+        </section>
+
+        <section id="reasons">
+            <h2>Why I Love You</h2>
+            <div class="reasons-grid">
+                <div class="reason-card">
+                    <h3>My Blessing</h3>
+                    <p>I truly believe you were sent to me as a gift from above.</p>
+                </div>
+                <div class="reason-card">
+                    <h3>My Safe Place</h3>
+                    <p>
+                        No matter how hard the day is, your hug makes everything
+                        disappear.
+                    </p>
+                </div>
+                <div class="reason-card">
+                    <h3>My Best Friend</h3>
+                    <p>
+                        You're the person I want to share every little piece of news with.
+                    </p>
+                </div>
+                <div class="reason-card">
+                    <h3>Your Soul</h3>
+                    <p>The way you love and care is purely magical.</p>
+                </div>
+            </div>
+            <button class="scroll-down" onclick="scrollToNext('memories')">
+                ❤
+            </button>
+        </section>
+
+        <section id="memories">
+            <h2>Our Favorite Memories</h2>
+            <div class="memory-container">
+                <div class="memory-item">
+                    <img src="assets/images/IMG-20251219-WA0021.jpg" alt="Memory" />
+                    <p class="memory-caption">That Special Day</p>
+                </div>
+                <div class="memory-item">
+                    <img src="assets/images/IMG-20251219-WA0024.jpg" alt="Memory" />
+                    <p class="memory-caption">Our First Laugh</p>
+                </div>
+                <div class="memory-item">
+                    <img src="assets/images/IMG-20260129-WA0009.jpg" alt="Memory" />
+                    <p class="memory-caption">Just Us</p>
+                </div>
+                <div class="memory-item">
+                    <img src="assets/images/IMG-20260129-WA0009.jpg" alt="Memory" />
+                    <p class="memory-caption">Just Us</p>
+                </div>
+                <div class="memory-item">
+                    <img src="assets/images/IMG-20260129-WA0009.jpg" alt="Memory" />
+                    <p class="memory-caption">Just Us</p>
+                </div>
+            </div>
+            <button class="scroll-down" onclick="scrollToNext('promises')">
+                ❤
+            </button>
+        </section>
+
+        <section id="promises">
+            <div class="promise-text-container">
+                <h3 class="promise-quote">My Promise to You</h3>
+                <p class="promise-subtext">
+                    "I promise to hold your hand through every storm and dance with you
+                    in every ray of sunshine."
+                </p>
+            </div>
+            <button class="scroll-down" onclick="scrollToNext('final')">❤</button>
+        </section>
+
+        <section id="final">
+            <h1 style="font-size: 4rem; color: var(--heart-red)">
+                Happy Valentine's Day!
+            </h1>
+            <p>I am so grateful for every second with you.</p>
+        </section>
+    </main>
+
+    <script>
+        // Move No button within a restricted area
+        function moveNo() {
+            const btn = document.getElementById("no-btn");
+            const wrapper = document.getElementById("btnWrapper");
+
+            // Keeps it within 150px of the center so it doesn't fly off screen
+            const padding = 100;
+            const x = (Math.random() - 0.5) * 300;
+            const y = (Math.random() - 0.5) * 200;
+
+            btn.style.transform = `translate(${x}px, ${y}px)`;
+        }
+
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.innerHTML = "❤";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.fontSize = Math.random() * 20 + 10 + "px";
+            heart.style.animationDuration = Math.random() * 3 + 2 + "s";
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 5000);
+        }
+
+        function celebrate() {
+            const gate = document.getElementById("hero-gate");
+            const main = document.getElementById("main-content");
+            gate.style.transform = "translateY(-100%)";
+            setTimeout(() => {
+                main.style.display = "block";
+                setTimeout(() => (main.style.opacity = "1"), 100);
+            }, 500);
+        }
+
+        function scrollToNext(id) {
+            document.getElementById(id).scrollIntoView({ behavior: "smooth" });
+        }
+    </script>
+</body>
+
+</html>
