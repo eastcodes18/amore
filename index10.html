@@ -23,7 +23,6 @@
         }
 
         html {
-            /* This enables the "Vertical Slider" effect */
             scroll-snap-type: y mandatory;
             scroll-behavior: smooth;
         }
@@ -37,7 +36,7 @@
 
         h1, h2 { font-family: "Dancing Script", cursive; }
 
-        /* --- OPENING SCREEN --- */
+        /* --- HERO GATE --- */
         #hero-gate {
             height: 100vh;
             width: 100%;
@@ -62,7 +61,7 @@
         }
 
         .gate-content h1 {
-            font-size: 2.8rem;
+            font-size: 2.5rem;
             margin-bottom: 2rem;
             color: var(--heart-red);
         }
@@ -75,47 +74,37 @@
             justify-content: center;
             align-items: center;
             gap: 15px;
-            width: 100%;
         }
 
         .btn {
-            padding: 12px 40px;
+            padding: 12px 45px;
             font-size: 1.1rem;
             border: none;
             border-radius: 30px;
             cursor: pointer;
-            transition: all 0.3s ease;
             font-weight: 500;
         }
 
-        #yes-btn {
-            background-color: var(--heart-red);
-            color: white;
-            z-index: 2;
-            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
-        }
+        #yes-btn { background-color: var(--heart-red); color: white; box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4); }
+        #no-btn { background-color: var(--pink-dark); color: white; }
 
-        #no-btn { background-color: var(--pink-dark); color: white; z-index: 1; }
-
-        /* --- MAIN CONTENT --- */
+        /* --- MAIN SECTIONS --- */
         #main-content { opacity: 0; display: none; transition: opacity 1s ease; }
 
         section {
             position: relative;
-            height: 100vh; /* Must be full height for snapping */
+            height: 100vh;
             width: 100%;
-            padding: 20px 10%;
+            padding: 40px 10%;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            /* This tells the section where to stop when scrolling */
             scroll-snap-align: start;
             scroll-snap-stop: always;
         }
 
-        /* --- REASONS --- */
         .reasons-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -132,13 +121,12 @@
             border-bottom: 3px solid var(--pink-light);
         }
 
-        .reason-card h3 { color: var(--heart-red); margin-bottom: 5px; font-size: 1.2rem; }
-        .reason-card p { font-size: 0.95rem; }
+        .reason-card h3 { color: var(--heart-red); font-size: 1.2rem; margin-bottom: 5px; }
 
-        /* --- CAROUSEL --- */
+        /* --- INFINITE SNAP CAROUSEL --- */
         .carousel-outer {
             width: 100vw;
-            margin-left: calc(-10%);
+            margin-left: calc(-10%); /* Centers on screen even with section padding */
             overflow: hidden;
             position: relative;
         }
@@ -146,8 +134,9 @@
         .memory-container {
             display: flex;
             overflow-x: auto;
-            gap: 15px;
-            padding: 20px 10%;
+            gap: 20px;
+            padding: 20px 10vw; /* Padding matches section indent */
+            scroll-snap-type: x mandatory; /* Enables horizontal snapping */
             scrollbar-width: none;
             -webkit-overflow-scrolling: touch;
         }
@@ -155,26 +144,28 @@
         .memory-container::-webkit-scrollbar { display: none; }
 
         .memory-item {
-            flex: 0 0 250px;
+            /* On mobile: take up 80% of width so he sees one at a time */
+            flex: 0 0 80vw; 
+            scroll-snap-align: center;
             background: white;
             padding: 10px;
-            padding-bottom: 30px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            transform: rotate(-1.5deg);
+            padding-bottom: 35px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transform: rotate(-1deg);
         }
 
         .memory-item:nth-child(even) { transform: rotate(1.5deg); }
 
         .memory-item img {
             width: 100%;
-            height: 200px;
+            height: 250px;
             object-fit: cover;
-            background: #eee;
+            border-radius: 5px;
         }
 
         .memory-caption {
             font-family: "Dancing Script", cursive;
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             margin-top: 15px;
         }
 
@@ -193,9 +184,15 @@
             100% { transform: translateY(-110vh) scale(1.5); opacity: 0; }
         }
 
+        /* --- DESKTOP ADJUSTMENTS --- */
         @media (min-width: 768px) {
+            .gate-content h1 { font-size: 3.5rem; }
+            .btn-wrapper { flex-direction: row; gap: 80px; }
             .reasons-grid { grid-template-columns: repeat(2, 1fr); max-width: 800px; gap: 20px; }
-            .btn-wrapper { flex-direction: row; gap: 100px; }
+            
+            /* Show more items on desktop */
+            .memory-item { flex: 0 0 300px; } 
+            .memory-container { justify-content: flex-start; }
         }
     </style>
 </head>
@@ -204,20 +201,20 @@
     <div id="hero-gate">
         <div class="gate-content">
             <div class="cat-img">
-                <img src="assets/images/cat-flower.jpg" alt="cat-flower" onerror="this.src='https://placekitten.com/200/200'"/>
+                <img src="assets/images/cat-flower.jpg" alt="Gift" onerror="this.src='https://placekitten.com/200/200'"/>
             </div>
             <h1>Will you be my Valentine?</h1>
-            <div class="btn-wrapper" id="btnWrapper">
-                <button class="btn" id="yes-btn" onclick="celebrate()">YES</button>
-                <button class="btn" id="no-btn" onclick="handleNo()">No</button>
+            <div class="btn-wrapper">
+                <button class="btn" id="yes-btn" onclick="celebrate()">YES ❤️</button>
+                <button class="btn" id="no-btn" onclick="handleNo()">No 🙈</button>
             </div>
         </div>
     </div>
 
     <main id="main-content">
         <section id="letter">
-            <h2 style="font-size: 2.8rem">To My Favorite Person,</h2>
-            <p style="max-width: 600px; line-height: 1.8; margin-top: 20px; font-size: 1.15rem;">
+            <h2 style="font-size: 3rem">To My Favorite Person,</h2>
+            <p style="max-width: 600px; line-height: 1.8; margin-top: 20px; font-size: 1.2rem;">
                 Meeting you wasn't something I planned, but it was the best thing that
                 ever happened to me. You are my greatest blessing from God, the piece
                 of my heart I didn't know was missing. Before you, I didn't realize
@@ -236,7 +233,7 @@
         </section>
 
         <section id="memories">
-            <h2>Our Favorite Memories</h2>
+            <h2 style="margin-bottom: 20px;">Our Favorite Memories</h2>
             <div class="carousel-outer">
                 <div class="memory-container" id="carousel">
                     <div class="memory-item"><img src="assets/images/IMG-20251219-WA0021.jpg" alt="1"><p class="memory-caption">That Special Day</p></div>
@@ -249,17 +246,17 @@
 
         <section id="promises" style="background-color: rgba(255, 255, 255, 0.3);">
             <div class="promise-text-container">
-                <h3 style="font-family: 'Dancing Script'; font-size: 2.2rem; color: var(--heart-red); margin-bottom: 10px;">My Promise to You</h3>
-                <p style="font-style: italic; font-size: 1.15rem; color: var(--pink-dark); opacity: 0.9;">
+                <h3 style="font-family: 'Dancing Script'; font-size: 2.5rem; color: var(--heart-red); margin-bottom: 10px;">My Promise to You</h3>
+                <p style="font-style: italic; font-size: 1.2rem; color: var(--pink-dark); opacity: 0.9;">
                     "I promise to hold your hand through every storm and dance with you in every ray of sunshine."
                 </p>
             </div>
         </section>
 
         <section id="final">
-            <h1 style="font-size: 3.5rem; color: var(--heart-red)">Happy Valentine's Day!</h1>
-            <p style="margin-top: 15px; font-size: 1.2rem;">I am so grateful for every second with you.</p>
-            <div style="font-size: 2.8rem; margin-top: 30px;">💍❤️✨</div>
+            <h1 style="font-size: 3.8rem; color: var(--heart-red)">Happy Valentine's Day!</h1>
+            <p style="margin-top: 15px; font-size: 1.3rem;">I am so grateful for every second with you.</p>
+            <div style="font-size: 3rem; margin-top: 30px;">💍❤️✨</div>
         </section>
     </main>
 
@@ -294,15 +291,18 @@
             }, 600);
         }
 
-        // INFINITE CAROUSEL JAVASCRIPT
+        // --- INFINITE CAROUSEL LOGIC ---
         const container = document.getElementById('carousel');
-        const children = [...container.children];
-        children.forEach(item => container.appendChild(item.cloneNode(true)));
-        children.forEach(item => container.insertBefore(item.cloneNode(true), container.firstChild));
+        const originalItems = [...container.children];
+        
+        // Clone for infinite effect
+        originalItems.forEach(item => container.appendChild(item.cloneNode(true)));
+        originalItems.forEach(item => container.insertBefore(item.cloneNode(true), container.firstChild));
 
         const updateScroll = () => {
-            const itemWidth = container.firstElementChild.offsetWidth + 15;
-            const totalWidth = itemWidth * children.length;
+            const itemWidth = container.firstElementChild.offsetWidth + 20; // Width + gap
+            const totalWidth = itemWidth * originalItems.length;
+
             if (container.scrollLeft <= 0) {
                 container.scrollLeft = totalWidth;
             } else if (container.scrollLeft >= totalWidth * 2) {
@@ -311,10 +311,12 @@
         };
 
         container.addEventListener('scroll', updateScroll);
-        window.onload = () => {
-            const itemWidth = container.firstElementChild.offsetWidth + 15;
-            container.scrollLeft = itemWidth * children.length;
-        };
+        
+        // Initial setup on load
+        window.addEventListener('load', () => {
+            const itemWidth = container.firstElementChild.offsetWidth + 20;
+            container.scrollLeft = itemWidth * originalItems.length;
+        });
     </script>
 </body>
 </html>
