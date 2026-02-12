@@ -30,7 +30,9 @@
             scroll-behavior: smooth;
         }
 
-        h1, h2 { font-family: "Dancing Script", cursive; }
+        h1, h2, .script-font {
+            font-family: "Dancing Script", cursive;
+        }
 
         /* --- OPENING SCREEN --- */
         #hero-gate {
@@ -90,15 +92,23 @@
             box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
         }
 
-        #no-btn { background-color: var(--pink-dark); color: white; z-index: 1; }
+        #no-btn {
+            background-color: var(--pink-dark);
+            color: white;
+            z-index: 1;
+        }
 
         /* --- MAIN CONTENT --- */
-        #main-content { opacity: 0; display: none; transition: opacity 1s ease; }
+        #main-content {
+            opacity: 0;
+            display: none;
+            transition: opacity 1s ease;
+        }
 
         section {
             position: relative;
-            min-height: 60vh; 
-            padding: 50px 10%;
+            min-height: 65vh; /* Tighter sections for mobile */
+            padding: 60px 10%;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -106,9 +116,13 @@
             text-align: center;
         }
 
-        #letter, #final { min-height: 100vh; padding: 80px 10%; }
+        /* --- SPECIFIC FULL HEIGHT FOR LETTER & FINAL --- */
+        #letter, #final {
+            min-height: 100vh;
+            padding: 80px 10%;
+        }
 
-        /* --- REASONS --- */
+        /* --- REASONS SECTION --- */
         .reasons-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -125,34 +139,35 @@
             border-bottom: 3px solid var(--pink-light);
         }
 
-        .reason-card h3 { color: var(--heart-red); margin-bottom: 8px; font-size: 1.3rem; }
-
-        /* --- CAROUSEL --- */
-        .carousel-outer {
-            width: 100vw;
-            margin-left: calc(-10%);
-            overflow: hidden;
-            position: relative;
+        .reason-card h3 {
+            color: var(--heart-red);
+            margin-bottom: 8px;
+            font-size: 1.3rem;
         }
 
+        /* --- MEMORIES PHOTO GALLERY --- */
         .memory-container {
             display: flex;
             overflow-x: auto;
             gap: 15px;
-            padding: 20px 10%;
-            /* Removed scroll-snap to fix infinite loop issues */
+            margin-top: 25px;
+            padding: 10px 20px;
+            width: 100vw;
+            margin-left: calc(-10%);
+            padding-left: 10%;
+            scroll-snap-type: x mandatory;
             scrollbar-width: none;
-            -webkit-overflow-scrolling: touch;
         }
 
         .memory-container::-webkit-scrollbar { display: none; }
 
         .memory-item {
-            flex: 0 0 250px;
+            flex: 0 0 240px;
+            scroll-snap-align: center;
             background: white;
             padding: 10px;
-            padding-bottom: 30px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            padding-bottom: 25px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.08);
             transform: rotate(-1.5deg);
         }
 
@@ -160,20 +175,20 @@
 
         .memory-item img {
             width: 100%;
-            height: 200px;
+            height: 180px;
             object-fit: cover;
             background: #eee;
         }
 
         .memory-caption {
             font-family: "Dancing Script", cursive;
-            font-size: 1.4rem;
-            margin-top: 15px;
+            font-size: 1.3rem;
+            margin-top: 12px;
         }
 
-        /* --- DESKTOP SCROLL HEART --- */
+        /* --- UTILS --- */
         .scroll-down {
-            margin-top: 30px;
+            margin-top: 25px;
             background: none;
             border: none;
             color: var(--heart-red);
@@ -181,7 +196,7 @@
             display: none; 
         }
 
-        .heart-particle {
+        .heart {
             position: fixed;
             bottom: -5vh;
             color: var(--heart-red);
@@ -195,11 +210,29 @@
             100% { transform: translateY(-110vh) scale(1.5); opacity: 0; }
         }
 
+        /* --- TABLET & DESKTOP ADJUSTMENTS --- */
         @media (min-width: 768px) {
-            section, #letter, #final { min-height: 100vh; }
-            .reasons-grid { grid-template-columns: repeat(2, 1fr); max-width: 800px; }
-            .scroll-down { display: block; animation: bounce 2s infinite; }
+            section, #letter, #final {
+                min-height: 100vh;
+                padding: 80px 10%;
+            }
+            .reasons-grid {
+                grid-template-columns: repeat(2, 1fr);
+                max-width: 800px;
+                gap: 25px;
+            }
+            .scroll-down {
+                display: block;
+                animation: bounce 2s infinite;
+            }
             .btn-wrapper { flex-direction: row; gap: 100px; }
+            .memory-container { 
+                flex-wrap: wrap; 
+                justify-content: center; 
+                width: 100%; 
+                margin-left: 0; 
+                overflow-x: visible; 
+            }
         }
 
         @keyframes bounce {
@@ -226,7 +259,7 @@
 
     <main id="main-content">
         <section id="letter">
-            <h2 style="font-size: 2.8rem">To My Favorite Person,</h2>
+            <h2 style="font-size: 2.8rem">To My Unplanned Love,</h2>
             <p style="max-width: 600px; line-height: 1.8; margin-top: 20px; font-size: 1.15rem;">
                 Meeting you wasn't something I planned, but it was the best thing that
                 ever happened to me. You are my greatest blessing from God, the piece
@@ -239,22 +272,48 @@
         <section id="reasons" style="background-color: rgba(255, 255, 255, 0.3);">
             <h2>Why I Love You</h2>
             <div class="reasons-grid">
-                <div class="reason-card"><h3>My Blessing</h3><p>I truly believe you were sent to me as a gift from above.</p></div>
-                <div class="reason-card"><h3>My Safe Place</h3><p>No matter how hard the day is, your presence makes everything disappear.</p></div>
-                <div class="reason-card"><h3>My Best Friend</h3><p>You're the person I want to share every little piece of news with.</p></div>
-                <div class="reason-card"><h3>Your Soul</h3><p>The way you love and care is purely magical.</p></div>
+                <div class="reason-card">
+                    <h3>My Blessing</h3>
+                    <p>I truly believe you were sent to me as a gift from above.</p>
+                </div>
+                <div class="reason-card">
+                    <h3>My Safe Place</h3>
+                    <p>No matter how hard the day is, your hug makes everything disappear.</p>
+                </div>
+                <div class="reason-card">
+                    <h3>My Best Friend</h3>
+                    <p>You're the person I want to share every little piece of news with.</p>
+                </div>
+                <div class="reason-card">
+                    <h3>Your Soul</h3>
+                    <p>The way you love and care is purely magical.</p>
+                </div>
             </div>
             <button class="scroll-down" onclick="scrollToNext('memories')">❤</button>
         </section>
 
         <section id="memories">
             <h2>Our Favorite Memories</h2>
-            <div class="carousel-outer">
-                <div class="memory-container" id="carousel">
-                    <div class="memory-item"><img src="assets/images/IMG-20251219-WA0021.jpg" alt="1"><p class="memory-caption">That Special Day</p></div>
-                    <div class="memory-item"><img src="assets/images/IMG-20251219-WA0024.jpg" alt="2"><p class="memory-caption">Our First Laugh</p></div>
-                    <div class="memory-item"><img src="assets/images/IMG-20260129-WA0009.jpg" alt="3"><p class="memory-caption">Just Us</p></div>
-                    <div class="memory-item"><img src="assets/images/IMG-20260129-WA0009.jpg" alt="4"><p class="memory-caption">Sweet Moments</p></div>
+            <div class="memory-container">
+                <div class="memory-item">
+                    <img src="assets/images/IMG-20251219-WA0021.jpg" alt="Memory" onerror="this.src='https://picsum.photos/seed/1/300/300'"/>
+                    <p class="memory-caption">That Special Day</p>
+                </div>
+                <div class="memory-item">
+                    <img src="assets/images/IMG-20251219-WA0024.jpg" alt="Memory" onerror="this.src='https://picsum.photos/seed/2/300/300'"/>
+                    <p class="memory-caption">Our First Laugh</p>
+                </div>
+                <div class="memory-item">
+                    <img src="assets/images/IMG-20260129-WA0009.jpg" alt="Memory" onerror="this.src='https://picsum.photos/seed/3/300/300'"/>
+                    <p class="memory-caption">Just Us</p>
+                </div>
+                <div class="memory-item">
+                    <img src="assets/images/IMG-20260129-WA0009.jpg" alt="Memory" onerror="this.src='https://picsum.photos/seed/4/300/300'"/>
+                    <p class="memory-caption">Sweet Moments</p>
+                </div>
+                <div class="memory-item">
+                    <img src="assets/images/IMG-20260129-WA0009.jpg" alt="Memory" onerror="this.src='https://picsum.photos/seed/4/300/300'"/>
+                    <p class="memory-caption">Sweet Moments</p>
                 </div>
             </div>
             <button class="scroll-down" onclick="scrollToNext('promises')">❤</button>
@@ -264,78 +323,66 @@
             <div class="promise-text-container">
                 <h3 style="font-family: 'Dancing Script'; font-size: 2.2rem; color: var(--heart-red); margin-bottom: 10px;">My Promise to You</h3>
                 <p style="font-style: italic; font-size: 1.15rem; color: var(--pink-dark); opacity: 0.9;">
-                    "I promise to hold your hand through every storm and dance with you in every ray of sunshine."
+                    "I promise to hold your hand through every storm and dance with you
+                    in every ray of sunshine."
                 </p>
             </div>
             <button class="scroll-down" onclick="scrollToNext('final')">❤</button>
         </section>
 
         <section id="final">
-            <h1 style="font-size: 3.5rem; color: var(--heart-red)">Happy Valentine's Day!</h1>
+            <h1 style="font-size: 3.5rem; color: var(--heart-red)">
+                Happy Valentine's Day!
+            </h1>
             <p style="margin-top: 15px; font-size: 1.2rem;">I am so grateful for every second with you.</p>
-            <div style="font-size: 2.8rem; margin-top: 30px;">💍❤️✨</div>
+            <div style="font-size: 2rem; margin-top: 30px;">💍❤️✨</div>
         </section>
     </main>
 
     <script>
-        // PERSUASIVE BUTTON
-        let yesScale = 1; let noScale = 1;
+        let yesScale = 1;
+        let noScale = 1;
+
         function handleNo() {
             const noBtn = document.getElementById("no-btn");
             const yesBtn = document.getElementById("yes-btn");
-            noScale -= 0.1; yesScale += 0.2;
+            noScale -= 0.1;
+            yesScale += 0.2;
             if (noScale < 0.3) noScale = 0.3;
             noBtn.style.transform = `scale(${noScale})`;
             yesBtn.style.transform = `scale(${yesScale})`;
-            noBtn.innerText = "🥺";
+            const phrases = ["Are you sure?", "Really?", "Think again!", "🥺"];
+            noBtn.innerText = phrases[Math.floor(Math.random() * phrases.length)];
         }
 
-        // CELEBRATION
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.innerHTML = "❤";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.fontSize = Math.random() * 20 + 20 + "px";
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 4000);
+        }
+
         function celebrate() {
-            document.getElementById("hero-gate").style.transform = "translateY(-100%)";
-            const burst = setInterval(() => {
-                const heart = document.createElement("div");
-                heart.classList.add("heart-particle");
-                heart.innerHTML = "❤";
-                heart.style.left = Math.random() * 100 + "vw";
-                heart.style.fontSize = Math.random() * 20 + 20 + "px";
-                document.body.appendChild(heart);
-                setTimeout(() => heart.remove(), 4000);
-            }, 150);
-            setTimeout(() => clearInterval(burst), 3000);
+            const gate = document.getElementById("hero-gate");
+            const main = document.getElementById("main-content");
+            gate.style.transform = "translateY(-100%)";
+            
+            const burst = setInterval(createHeart, 150);
+            setTimeout(() => clearInterval(burst), 2500);
+
             setTimeout(() => {
-                const main = document.getElementById("main-content");
                 main.style.display = "block";
-                setTimeout(() => main.style.opacity = "1", 50);
+                setTimeout(() => (main.style.opacity = "1"), 50);
             }, 600);
         }
 
-        function scrollToNext(id) { document.getElementById(id).scrollIntoView({ behavior: "smooth" }); }
-
-        // STABLE INFINITE LOOP
-        const container = document.getElementById('carousel');
-        // Clone nodes once
-        const children = [...container.children];
-        children.forEach(item => container.appendChild(item.cloneNode(true)));
-        children.forEach(item => container.insertBefore(item.cloneNode(true), container.firstChild));
-
-        // Center on the real first item
-        const updateScroll = () => {
-            const itemWidth = container.firstElementChild.offsetWidth + 15;
-            const totalWidth = itemWidth * children.length;
-            if (container.scrollLeft <= 0) {
-                container.scrollLeft = totalWidth;
-            } else if (container.scrollLeft >= totalWidth * 2) {
-                container.scrollLeft = totalWidth;
-            }
-        };
-
-        container.addEventListener('scroll', updateScroll);
-        // Initial center
-        window.onload = () => {
-            const itemWidth = container.firstElementChild.offsetWidth + 15;
-            container.scrollLeft = itemWidth * children.length;
-        };
+        function scrollToNext(id) {
+            document.getElementById(id).scrollIntoView({ behavior: "smooth" });
+        }
     </script>
 </body>
+
 </html>
