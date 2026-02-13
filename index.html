@@ -5,7 +5,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>My Forever Valentine</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Quicksand:wght@300;500&display=swap" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Quicksand:wght@300;500&display=swap"
+        rel="stylesheet" />
     <style>
         :root {
             --pink-light: #ffcad4;
@@ -35,7 +37,10 @@
             overflow-x: hidden;
         }
 
-        h1, h2 { font-family: "Dancing Script", cursive; }
+        h1,
+        h2 {
+            font-family: "Dancing Script", cursive;
+        }
 
         /* --- OPENING SCREEN --- */
         #hero-gate {
@@ -58,7 +63,7 @@
             height: auto;
             border-radius: 20px;
             margin-bottom: 20px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
         }
 
         .gate-content h1 {
@@ -95,14 +100,23 @@
             box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
         }
 
-        #no-btn { background-color: var(--pink-dark); color: white; z-index: 1; }
+        #no-btn {
+            background-color: var(--pink-dark);
+            color: white;
+            z-index: 1;
+        }
 
         /* --- MAIN CONTENT --- */
-        #main-content { opacity: 0; display: none; transition: opacity 1s ease; }
+        #main-content {
+            opacity: 0;
+            display: none;
+            transition: opacity 1s ease;
+        }
 
         section {
             position: relative;
-            height: 100vh; /* Must be full height for snapping */
+            height: 100vh;
+            /* Must be full height for snapping */
             width: 100%;
             padding: 20px 10%;
             display: flex;
@@ -132,8 +146,15 @@
             border-bottom: 3px solid var(--pink-light);
         }
 
-        .reason-card h3 { color: var(--heart-red); margin-bottom: 5px; font-size: 1.2rem; }
-        .reason-card p { font-size: 0.95rem; }
+        .reason-card h3 {
+            color: var(--heart-red);
+            margin-bottom: 5px;
+            font-size: 1.2rem;
+        }
+
+        .reason-card p {
+            font-size: 0.95rem;
+        }
 
         /* --- CAROUSEL --- */
         .carousel-outer {
@@ -152,7 +173,9 @@
             -webkit-overflow-scrolling: touch;
         }
 
-        .memory-container::-webkit-scrollbar { display: none; }
+        .memory-container::-webkit-scrollbar {
+            display: none;
+        }
 
         .memory-item {
             flex: 0 0 250px;
@@ -163,7 +186,9 @@
             transform: rotate(-1.5deg);
         }
 
-        .memory-item:nth-child(even) { transform: rotate(1.5deg); }
+        .memory-item:nth-child(even) {
+            transform: rotate(1.5deg);
+        }
 
         .memory-item img {
             width: 100%;
@@ -189,13 +214,28 @@
         }
 
         @keyframes float {
-            0% { transform: translateY(0) scale(1); opacity: 1; }
-            100% { transform: translateY(-110vh) scale(1.5); opacity: 0; }
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-110vh) scale(1.5);
+                opacity: 0;
+            }
         }
 
         @media (min-width: 768px) {
-            .reasons-grid { grid-template-columns: repeat(2, 1fr); max-width: 800px; gap: 20px; }
-            .btn-wrapper { flex-direction: row; gap: 100px; }
+            .reasons-grid {
+                grid-template-columns: repeat(2, 1fr);
+                max-width: 800px;
+                gap: 20px;
+            }
+
+            .btn-wrapper {
+                flex-direction: row;
+                gap: 100px;
+            }
         }
     </style>
 </head>
@@ -204,7 +244,8 @@
     <div id="hero-gate">
         <div class="gate-content">
             <div class="cat-img">
-                <img src="assets/images/cat-flower.jpg" alt="cat-flower" onerror="this.src='https://placekitten.com/200/200'"/>
+                <img src="assets/images/cat-flower.jpg" alt="cat-flower"
+                    onerror="this.src='https://placekitten.com/200/200'" />
             </div>
             <h1>Will you be my Valentine?</h1>
             <div class="btn-wrapper" id="btnWrapper">
@@ -219,19 +260,35 @@
             <h2 style="font-size: 2.8rem">To My Favorite Person,</h2>
             <p style="max-width: 600px; line-height: 1.8; margin-top: 20px; font-size: 1.15rem;">
                 Meeting you wasn't something I planned, but it was the best thing that
-                ever happened to me. You are my greatest blessing from God, the piece
-                of my heart I didn't know was missing. Before you, I didn't realize
-                life could be this bright.
+                ever happened to me. You became part of my life in a way I didn’t expect,
+                and what we’ve built together speaks for itself.
             </p>
         </section>
 
         <section id="reasons" style="background-color: rgba(255, 255, 255, 0.3);">
             <h2>Why I Love You</h2>
             <div class="reasons-grid">
-                <div class="reason-card"><h3>My Blessing</h3><p>I truly believe you were sent to me as a gift from above.</p></div>
-                <div class="reason-card"><h3>My Safe Place</h3><p>No matter how hard the day is, your presence makes everything disappear.</p></div>
-                <div class="reason-card"><h3>My Best Friend</h3><p>You're the person I want to share every little piece of news with.</p></div>
-                <div class="reason-card"><h3>Your Soul</h3><p>The way you love and care is purely magical.</p></div>
+                <div class="reason-card">
+                    <h3>We Found Each Other</h3>
+                    <p> Having you in my life feels right — like our paths were meant to cross.✨💞</p>
+                </div>
+                <div class="reason-card">
+                    <h3>Your Presence</h3>
+                    <p> No matter how hard the day is, even two minutes talking with you makes everything fade away.🫂🏠
+                    </p>
+                </div>
+                <div class="reason-card">
+                    <h3>My MAN</h3>
+                    <p> You’re the person I want to share every little piece of news with.🧑‍🤝‍🧑💌 </p>
+                </div>
+                <div class="reason-card">
+                    <h3>Your Kindness</h3>
+                    <p> The way you love and care feels genuine, warm, and deeply comforting.🥰❤️ </p>
+                </div>
+                <div class="reason-card">
+                    <h3>Always YOU</h3>
+                    <p> I never needed reasons — loving you has always come naturally to me.♾️👩‍❤️‍👨 </p>
+                </div>
             </div>
         </section>
 
@@ -239,17 +296,33 @@
             <h2>Our Favorite Memories</h2>
             <div class="carousel-outer">
                 <div class="memory-container" id="carousel">
-                    <div class="memory-item"><img src="assets/images/IMG-20251219-WA0021.jpg" alt="1"><p class="memory-caption">That Special Day</p></div>
-                    <div class="memory-item"><img src="assets/images/IMG-20251219-WA0024.jpg" alt="2"><p class="memory-caption">Our First Laugh</p></div>
-                    <div class="memory-item"><img src="assets/images/IMG-20260129-WA0009.jpg" alt="3"><p class="memory-caption">Just Us</p></div>
-                    <div class="memory-item"><img src="assets/images/IMG-20260129-WA0009.jpg" alt="4"><p class="memory-caption">Sweet Moments</p></div>
+                    <div class="memory-item"><img src="assets/images/that day.jpg" alt="1">
+                        <p class="memory-caption">Our Beginning</p>
+                    </div>
+                    <div class="memory-item"><img src="assets/images/engagement.jpg" alt="2">
+                        <p class="memory-caption">Our New Chapter</p>
+                    </div>
+                    <div class="memory-item"><img src="assets/images/us.jpg" alt="3">
+                        <p class="memory-caption">Just Us</p>
+                    </div>
+                    <div class="memory-item"><img src="assets/images/said yes.jpg" alt="4">
+                        <p class="memory-caption">We said YES</p>
+                    </div>
+                    <div class="memory-item"><img src="assets/images/kankupagla.JPG" alt="4">
+                        <p class="memory-caption">Our Home</p>
+                    </div>
+                    <div class="memory-item"><img src="assets/images/day-out.jpg" alt="4">
+                        <p class="memory-caption">Sweet Moments</p>
+                    </div>
                 </div>
             </div>
         </section>
 
         <section id="promises" style="background-color: rgba(255, 255, 255, 0.3);">
             <div class="promise-text-container">
-                <h3 style="font-family: 'Dancing Script'; font-size: 2.2rem; color: var(--heart-red); margin-bottom: 10px;">My Promise to You</h3>
+                <h3
+                    style="font-family: 'Dancing Script'; font-size: 2.2rem; color: var(--heart-red); margin-bottom: 10px;">
+                    My Promise to You</h3>
                 <p style="font-style: italic; font-size: 1.15rem; color: var(--pink-dark); opacity: 0.9;">
                     "I promise to hold your hand through every storm and dance with you in every ray of sunshine."
                 </p>
@@ -258,8 +331,8 @@
 
         <section id="final">
             <h1 style="font-size: 3.5rem; color: var(--heart-red)">Happy Valentine's Day!</h1>
-            <p style="margin-top: 15px; font-size: 1.2rem;">I am so grateful for every second with you.</p>
-            <div style="font-size: 2.8rem; margin-top: 30px;">💍❤️✨</div>
+            <p style="margin-top: 15px; font-size: 1.2rem;">My Sun and the Stars!</p>
+            <div style="font-size: 1.8rem; margin-top: 20px;">💍❤️✨</div>
         </section>
     </main>
 
@@ -317,4 +390,5 @@
         };
     </script>
 </body>
+
 </html>
